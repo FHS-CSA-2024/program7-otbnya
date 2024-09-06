@@ -1,38 +1,42 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fs8MpICL)
-# Program 7
+import java.util.Scanner;
 
-## Program Description:  
->In the heyday of the Dunder Mifflin empire, Scranton used a monetary system based on schrute-bucks, stanley-nickels, and klevins.
->
->There were 20 klevins to a schrute-buck, and 12 stanley-nickels to a klevin.
->
->The notation for this old system used two decimal points, so that, for example, $5.2.8 meant 5 schrute-bucks, 2 klevins and 8 stanley-nickels.
->
->The new monetary system introduced after Kevin was deposed, consists of only schrute-bucks and stanley-nickels, with 100 stanley-nickels to a schrute-buck.  We'll call this new system decimal schrute-buck.
->
->Thus $5.2.8 in the old notation is $5.13 in decimal schrute-bucks (actually $5.1333333).  
+public class SchruteBuckConverter {
 
-- Write a program to convert the old schrute-bucks stanley-nickels klevins format to decimal schrute-bucks.
-  - Use final variables for each conversion rate
-- Choose variable names which are meaningful for this problem.
+    // Constants for conversion rates
+    private static final int KLEVINS_PER_SCHRUTE_BUCK = 20;
+    private static final int STANLEY_NICKELS_PER_KLEVIN = 12;
+    private static final int STANLEY_NICKELS_PER_SCHRUTE_BUCK = 100;
 
-## Program Data:
-N/A
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-## Statements Required: 
-- Input
-- Output
-- Variable Assignment
-- Final Variables
+        // Input for schrute-bucks, klevins, and stanley-nickels
+        System.out.print("Enter schrute-bucks: ");
+        int schruteBucks = scanner.nextInt();
 
-## Sample Output:
->Enter schrute-bucks:  7
->
->Enter klevins:  17
->
->Enter stanley-nickels:  9
->
-> ----------------------------
->
->Decimal schrute-bucks = $7.89
+        System.out.print("Enter klevins: ");
+        int klevins = scanner.nextInt();
 
+        System.out.print("Enter stanley-nickels: ");
+        int stanleyNickels = scanner.nextInt();
+
+        // Convert to decimal schrute-bucks
+        double decimalSchruteBucks = convertToDecimalSchruteBucks(schruteBucks, klevins, stanleyNickels);
+
+        // Output the result
+        System.out.printf("Decimal schrute-bucks = $%.2f%n", decimalSchruteBucks);
+        
+        // Close the scanner
+        scanner.close();
+    }
+
+    private static double convertToDecimalSchruteBucks(int schruteBucks, int klevins, int stanleyNickels) {
+        // Calculate the total stanley nickels from the old system
+        int totalStanleyNickels = (schruteBucks * STANLEY_NICKELS_PER_SCHRUTE_BUCK) +
+                                   (klevins * STANLEY_NICKELS_PER_KLEVIN) +
+                                   stanleyNickels;
+
+        // Convert total stanley nickels to decimal schrute bucks
+        return totalStanleyNickels / (double) STANLEY_NICKELS_PER_SCHRUTE_BUCK;
+    }
+}
